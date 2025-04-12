@@ -48,7 +48,7 @@
               alert("An error occured");
             },
           });
-        }, 1000);
+        }, 1500);
       });
     </script>
 
@@ -90,6 +90,45 @@
           },
         });
         document.getElementById("message").value = "";
+      });
+    </script>
+
+
+
+    <script>
+      const scrollToBottom = () => {
+        // Scroll smoothly to the bottom
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
+      };
+
+      const isNearBottom = () => {
+        return (
+          window.innerHeight + window.scrollY >=
+          document.body.scrollHeight - 100
+        );
+      };
+
+      // Scroll to the bottom after a 2-second delay, then delay scroll by 1 second
+      window.onload = function () {
+        setTimeout(() => {
+          setTimeout(scrollToBottom, 1000); // 1-second delay for smooth scrolling
+        }, 2000); // 2-second initial delay
+      };
+
+      // Auto-scroll when new content is added
+      const observer = new MutationObserver(() => {
+        if (isNearBottom()) {
+          scrollToBottom();
+        }
+      });
+
+      // Observe changes in the body to auto-scroll when new content appears
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
       });
     </script>
   </body>

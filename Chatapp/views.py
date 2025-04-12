@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from Chatapp.models import Room, Message
 from django.http import HttpResponse, JsonResponse
+import random
 # Create your views here
 
 
@@ -21,13 +22,27 @@ def room(request, room):
 def checkview(request):
     room = request.POST['room_name']
     username = request.POST['username']
+    default_Rand = str(random.randint(0, 999))
+    # create a public room at the first
 
-    if Room.objects.filter(name=room).exists():
-        return redirect('/'+room+'/?username='+username)
+    if not room and not username:
+        return redirect(f'/Public/?username={'user'+default_Rand}')
+    elif not room:
+        return redirect(f'/Public/?username={username}')
+    elif not username:
+        if Room.objects.filter(name=room).exists():
+            return redirect(f'/{room}/?username={'user'+default_Rand}')
+        else:
+            new_room = Room.objects.create(name=room)
+            new_room.save()
+            return redirect(f'/{room}/?username={'user'+default_Rand}')
     else:
-        new_room = Room.objects.create(name=room)
-        new_room.save()
-        return redirect('/'+room+'/?username='+username)
+        if Room.objects.filter(name=room).exists():
+            return redirect(f'/{room}/?username={username}')
+        else:
+            new_room = Room.objects.create(name=room)
+            new_room.save()
+            return redirect(f'/{room}/?username={username}')
 
 
 def send(request):

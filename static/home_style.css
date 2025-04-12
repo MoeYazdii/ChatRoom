@@ -6,7 +6,7 @@ body {
 
 .container {
   border: 2px solid #dedede;
-  background-color: #f1f1f1;
+  background-color: #f2f2f2;
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
@@ -60,7 +60,7 @@ select {
 
 input[type="submit"] {
   width: 100%;
-  background-color: #4caf50;
+  background-color: #0b76c8;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -70,7 +70,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #073f6a;
 }
 
 div {
